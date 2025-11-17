@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
     public $timestamps = false;
     protected $table = 'admins';
@@ -19,4 +19,19 @@ class Admin extends Model
         'admin_password',
         'admin_isActive',
     ];
+
+    // Скрытие пароля при сериализации
+    protected $hidden = [
+        'admin_password',
+    ];
+
+    public function getAuthPassword()
+    {
+        return $this->admin_password;
+    }
+
+    public function getEmailForPasswordReset()
+    {
+        return $this->admin_email;
+    }
 }
