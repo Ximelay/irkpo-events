@@ -14,15 +14,16 @@ class Faculty extends Model
     protected $fillable = [
         'facultyID',
         'facultyName',
+        'facultyHead'
     ];
-
-    public function groups(): HasMany
-    {
-        return $this->hasMany(Group::class, 'faculties_facultyID', 'facultyID');
-    }
 
     public function events(): HasMany
     {
         return $this->hasMany(Event::class, 'faculties_facultyID', 'facultyID');
+    }
+
+    public function specialities(): HasMany
+    {
+        return $this->hasMany(Specialty::class, 'faculties_facultyID', 'facultyID');
     }
 }

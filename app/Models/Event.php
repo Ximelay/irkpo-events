@@ -21,8 +21,8 @@ class Event extends Model
         'budget',
         'createdAt',
         'eventTypes_eventTypeID',
+        'organizers_organizerID',
         'eventStatuses_eventStatusID',
-        'users_OrganizerID',
         'faculties_facultyID',
     ];
 
@@ -38,7 +38,7 @@ class Event extends Model
 
     public function organizer()
     {
-        return $this->belongsTo(User::class, 'users_OrganizerID', 'userID');
+        return $this->belongsTo(Organizer::class, 'organizers_organizerID', 'organizerID');
     }
 
     public function faculty()
@@ -51,8 +51,8 @@ class Event extends Model
         return $this->hasMany(EventRegistration::class, 'events_eventID', 'eventID');
     }
 
-    public function expenses()
+    public function inventories(): HasMany
     {
-        return $this->hasMany(EventExpense::class, 'events_eventID', 'eventID');
+        return $this->hasMany(Inventory::class, 'events_eventID', 'eventID');
     }
 }

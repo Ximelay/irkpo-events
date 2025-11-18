@@ -17,26 +17,15 @@ class User extends Model
         'lastName',
         'middleName',
         'email',
-        'password',
         'isActive',
         'createdAt',
         'roles_roleID',
         'groups_groupID',
     ];
 
-    public function role()
-    {
-        return $this->belongsTo(Role::class, 'roles_roleID', 'roleID');
-    }
-
     public function group()
     {
         return $this->belongsTo(Group::class, 'groups_groupID', 'groupID');
-    }
-
-    public function organizedEvents(): HasMany
-    {
-        return $this->hasMany(Event::class, 'users_OrganizerID', 'userID');
     }
 
     public function registrations(): HasMany
@@ -44,8 +33,4 @@ class User extends Model
         return $this->hasMany(EventRegistration::class, 'users_userID', 'userID');
     }
 
-    public function expenses(): HasMany
-    {
-        return $this->hasMany(EventExpense::class, 'users_purchasedBy', 'userID');
-    }
 }
