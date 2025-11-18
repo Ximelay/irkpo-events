@@ -23,6 +23,7 @@ class Admin extends Authenticatable
     // Скрытие пароля при сериализации
     protected $hidden = [
         'admin_password',
+        'remember_token',
     ];
 
     public function getAuthPassword()
