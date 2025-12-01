@@ -26,6 +26,14 @@ class Event extends Model
         'faculties_facultyID',
     ];
 
+    /**
+     * Получить имя ключа маршрута для модели.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'eventID';
+    }
+
     public function eventType()
     {
         return $this->belongsTo(EventType::class, 'eventTypes_eventTypeID', 'eventTypeID');

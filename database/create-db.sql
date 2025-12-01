@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `irkpo_events`.`eventTypes`
 CREATE TABLE IF NOT EXISTS `irkpo_events`.`eventStatuses`
 (
     `eventStatusID` INT         NOT NULL AUTO_INCREMENT COMMENT 'Уникальный идентификатор статуса мероприятия',
-    `eventStatus`   VARCHAR(50) NOT NULL DEFAULT 'planed' COMMENT 'Статус мероприятия. По умолчанию - \'planed\'',
+    `eventStatus`   VARCHAR(50) NOT NULL DEFAULT 'planned' COMMENT 'Статус мероприятия. По умолчанию - \'planed\'',
     PRIMARY KEY (`eventStatusID`),
     UNIQUE INDEX `eventStatus_UNIQUE` (`eventStatus` ASC) VISIBLE
 )
