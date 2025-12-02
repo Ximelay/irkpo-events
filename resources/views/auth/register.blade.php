@@ -19,7 +19,7 @@
         <!-- admin_middleName -->
         <div>
             <x-input-label for="admin_middleName" :value="__('Отчество (необязательно)')" />
-            <x-text-input id="admin_middleName" class="block mt-1 w-full" type="text" name="admin_middleName" :value="old('admin_middleName')" required autofocus autocomplete="admin_middleName" />
+            <x-text-input id="admin_middleName" class="block mt-1 w-full" type="text" name="admin_middleName" :value="old('admin_middleName')" autofocus autocomplete="admin_middleName" />
             <x-input-error :messages="$errors->get('admin_middleName')" class="mt-2" />
         </div>
 
