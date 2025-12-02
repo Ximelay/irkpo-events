@@ -15,7 +15,7 @@ class Group extends Model
     protected $fillable = [
         'groupID',
         'groupName',
-        'faculties_facultyID',
+        'specialties_specialityID',
     ];
 
     public function speciality(): BelongsTo
