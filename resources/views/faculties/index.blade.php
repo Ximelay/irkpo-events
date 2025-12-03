@@ -38,12 +38,12 @@
                                     <td class="py-2 px-4 border-b">{{ $faculty->facultyName }}</td>
                                     <td class="py-2 px-4 border-b">{{ $faculty->facultyHead }}</td>
                                     <td class="py-2 px-4 border-b">
-                                        <a href="{{ route('faculties.show', $faculty) }}" class="text-blue-500 hover:underline">Просмотр</a>
-                                        <a href="{{ route('faculties.edit', $faculty) }}" class="text-yellow-500 hover:underline ml-2">Редактировать</a>
+                                        <a href="{{ route('faculties.show', $faculty) }}" class="text-blue-600 hover:text-blue-800 font-medium">Просмотр</a>
+                                        <a href="{{ route('faculties.edit', $faculty) }}" class="text-indigo-600 hover:text-indigo-800 font-medium ml-2">Редактировать</a>
                                         <form action="{{ route('faculties.destroy', $faculty) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:underline ml-2">Удалить</button>
+                                            <button type="submit" class="text-red-600 hover:text-red-800 font-medium ml-2">Удалить</button>
                                         </form>
                                     </td>
                                 </tr>

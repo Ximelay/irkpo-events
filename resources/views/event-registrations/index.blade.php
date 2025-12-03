@@ -42,12 +42,12 @@
                                     <td class="py-2 px-4 border-b">{{ $registration->statusEventRegistration }}</td>
                                     <td class="py-2 px-4 border-b">{{ $registration->registrationDate }}</td>
                                     <td class="py-2 px-4 border-b">
-                                        <a href="{{ route('event-registrations.show', $registration) }}" class="text-blue-500 hover:underline">Просмотр</a>
-                                        <a href="{{ route('event-registrations.edit', $registration) }}" class="text-yellow-500 hover:underline ml-2">Редактировать</a>
+                                        <a href="{{ route('event-registrations.show', $registration) }}" class="text-blue-600 hover:text-blue-800 font-medium">Просмотр</a>
+                                        <a href="{{ route('event-registrations.edit', $registration) }}" class="text-indigo-600 hover:text-indigo-800 font-medium ml-2">Редактировать</a>
                                         <form action="{{ route('event-registrations.destroy', $registration) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:underline ml-2">Удалить</button>
+                                            <button type="submit" class="text-red-600 hover:text-red-800 font-medium ml-2">Удалить</button>
                                         </form>
                                     </td>
                                 </tr>

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Inventories;
 
+use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Inventory;
 use App\Models\InventoryCategory;

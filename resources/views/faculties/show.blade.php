@@ -21,7 +21,7 @@
                         <strong class="text-gray-700">Глава:</strong>
                         <p class="text-gray-900">{{ $faculty->facultyHead }}</p>
                     </div>
-                    <a href="{{ route('faculties.index') }}" class="text-blue-500 hover:underline">Назад к списку</a>
+                    <a href="{{ route('faculties.index') }}" class="text-blue-600 hover:text-blue-800 font-medium">Назад к списку</a>
                 </div>
             </div>
         </div>

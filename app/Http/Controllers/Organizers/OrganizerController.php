@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Organizers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Organizer;
 use Illuminate\Http\Request;
 

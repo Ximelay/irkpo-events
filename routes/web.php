@@ -1,16 +1,17 @@
 <?php
 
+use App\Http\Controllers\Curators\CuratorController;
+use App\Http\Controllers\Events\EventController;
+use App\Http\Controllers\Events\EventRegistrationController;
+use App\Http\Controllers\Events\EventTypeController;
+use App\Http\Controllers\Faculties\FacultyController;
+use App\Http\Controllers\Faculties\SpecialtyController;
+use App\Http\Controllers\Groups\GroupController;
+use App\Http\Controllers\Inventories\InventoryCategoryController;
+use App\Http\Controllers\Inventories\InventoryController;
+use App\Http\Controllers\Organizers\OrganizerController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\CuratorController;
-use App\Http\Controllers\FacultyController;
-use App\Http\Controllers\GroupController;
-use App\Http\Controllers\SpecialtyController;
-use App\Http\Controllers\InventoryCategoryController;
-use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\OrganizerController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\EventRegistrationController;
+use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -29,6 +30,11 @@ Route::middleware('auth')->group(function () {
     // CRUD маршруты для мероприятий
     Route::resource('events', EventController::class)->parameters([
         'events' => 'event:eventID'
+    ]);
+
+    // CRUD маршруты для типов мероприятий
+    Route::resource('event-types', EventTypeController::class)->parameters([
+        'event-types' => 'eventType:eventTypeID'
     ]);
 
     Route::resource('faculties', FacultyController::class)->parameters([

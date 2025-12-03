@@ -48,10 +48,13 @@
                     <h3 class="font-semibold text-lg">Другое</h3>
                     <ul class="mt-4 space-y-2">
                         <li>
-                            <a href="{{ route('inventory-categories.index') }}" class="text-blue-500 hover:underline">Категории инвентаря</a>
+                            <a href="{{ route('inventory-categories.index') }}" class="text-blue-600 hover:text-blue-800 font-medium">Категории инвентаря</a>
                         </li>
                         <li>
-                            <a href="{{ route('inventories.index') }}" class="text-blue-500 hover:underline">Инвентарь</a>
+                            <a href="{{ route('inventories.index') }}" class="text-blue-600 hover:text-blue-800 font-medium">Инвентарь</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('event-types.index') }}" class="text-blue-600 hover:text-blue-800 font-medium">Типы мероприятий</a>
                         </li>
                     </ul>
                 </div>

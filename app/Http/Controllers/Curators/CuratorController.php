@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Curators;
 
+use App\Http\Controllers\Controller;
 use App\Models\Curator;
 use App\Models\Group;
 use Illuminate\Http\Request;

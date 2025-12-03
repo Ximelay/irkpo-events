@@ -38,12 +38,12 @@
                                     <td class="py-2 px-4 border-b">{{ $curator->curator_lastName }} {{ $curator->curator_firstName }} {{ $curator->curator_middleName }}</td>
                                     <td class="py-2 px-4 border-b">{{ $curator->groups->groupName }}</td>
                                     <td class="py-2 px-4 border-b">
-                                        <a href="{{ route('curators.show', $curator) }}" class="text-blue-500 hover:underline">Просмотр</a>
-                                        <a href="{{ route('curators.edit', $curator) }}" class="text-yellow-500 hover:underline ml-2">Редактировать</a>
+                                        <a href="{{ route('curators.show', $curator) }}" class="text-blue-600 hover:text-blue-800 font-medium">Просмотр</a>
+                                        <a href="{{ route('curators.edit', $curator) }}" class="text-indigo-600 hover:text-indigo-800 font-medium ml-2">Редактировать</a>
                                         <form action="{{ route('curators.destroy', $curator) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:underline ml-2">Удалить</button>
+                                            <button type="submit" class="text-red-600 hover:text-red-800 font-medium ml-2">Удалить</button>
                                         </form>
                                     </td>
                                 </tr>

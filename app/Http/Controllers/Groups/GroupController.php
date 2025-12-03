@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Groups;
 
+use App\Http\Controllers\Controller;
 use App\Models\Group;
 use App\Models\Specialty;
 use Illuminate\Http\Request;

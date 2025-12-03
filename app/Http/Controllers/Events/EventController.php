@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Events;
 
-use App\Models\Event;
-use App\Models\EventType;
-use App\Models\EventStatus;
-use App\Models\Organizer;
-use App\Models\Faculty;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
-use Illuminate\Http\Request;
+use App\Models\Event;
+use App\Models\EventStatus;
+use App\Models\EventType;
+use App\Models\Faculty;
+use App\Models\Organizer;
 
 class EventController extends Controller
 {

@@ -29,7 +29,7 @@
                         <strong class="text-gray-700">Группа:</strong>
                         <p class="text-gray-900">{{ $curator->groups->groupName }}</p>
                     </div>
-                    <a href="{{ route('curators.index') }}" class="text-blue-500 hover:underline">Назад к списку</a>
+                    <a href="{{ route('curators.index') }}" class="text-blue-600 hover:text-blue-800 font-medium">Назад к списку</a>
                 </div>
             </div>
         </div>

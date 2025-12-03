@@ -40,12 +40,12 @@
                                     <td class="py-2 px-4 border-b">{{ $user->user_email }}</td>
                                     <td class="py-2 px-4 border-b">{{ $user->group->groupName ?? 'N/A' }}</td>
                                     <td class="py-2 px-4 border-b">
-                                        <a href="{{ route('users.show', $user) }}" class="text-blue-500 hover:underline">Просмотр</a>
-                                        <a href="{{ route('users.edit', $user) }}" class="text-yellow-500 hover:underline ml-2">Редактировать</a>
+                                        <a href="{{ route('users.show', $user) }}" class="text-blue-600 hover:text-blue-800 font-medium">Просмотр</a>
+                                        <a href="{{ route('users.edit', $user) }}" class="text-indigo-600 hover:text-indigo-800 font-medium ml-2">Редактировать</a>
                                         <form action="{{ route('users.destroy', $user) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:underline ml-2">Удалить</button>
+                                            <button type="submit" class="text-red-600 hover:text-red-800 font-medium ml-2">Удалить</button>
                                         </form>
                                     </td>
                                 </tr>
