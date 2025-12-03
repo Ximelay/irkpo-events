@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Groups;
 
 use App\Http\Controllers\Controller;
+use App\Imports\StudentsImport;
 use App\Models\Group;
 use App\Models\Specialty;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GroupController extends Controller
 {
@@ -48,6 +50,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
+        $group->load(['users', 'speciality']);
         return view('groups.show', compact('group'));
     }
 
@@ -85,5 +88,55 @@ class GroupController extends Controller
 
         return redirect()->route('groups.index')
             ->with('success', 'Group deleted successfully');
+    }
+
+    /**
+     * Массовый импорт студентов из Excel файла
+     */
+    public function importStudents(Request $request, Group $group)
+    {
+        $request->validate([
+            'students_file' => 'required|file|mimes:xlsx,xls|max:2048',
+        ], [
+            'students_file.required' => 'Необходимо выбрать файл для импорта',
+            'students_file.mimes' => 'Файл должен быть в формате Excel (xlsx, xls)',
+            'students_file.max' => 'Размер файла не должен превышать 2 МБ',
+        ]);
+
+        try {
+            $import = new StudentsImport($group->groupID);
+            Excel::import($import, $request->file('students_file'));
+
+            $importedCount = $import->getImportedCount();
+            $skippedCount = $import->getSkippedCount();
+            $errors = $import->getErrors();
+
+            $message = "Успешно импортировано студентов: {$importedCount}";
+            if ($skippedCount > 0) {
+                $message .= ". Пропущено (дубликаты или ошибки): {$skippedCount}";
+            }
+
+            if (!empty($errors)) {
+                $message .= "\n\nОшибки парсинга:\n" . implode("\n", array_slice($errors, 0, 5));
+                if (count($errors) > 5) {
+                    $message .= "\n... и ещё " . (count($errors) - 5) . " ошибок";
+                }
+            }
+
+            return redirect()->route('groups.show', $group->groupID)
+                ->with('success', $message);
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+            $errors = [];
+            foreach ($failures as $failure) {
+                $errors[] = "Строка {$failure->row()}: " . implode(', ', $failure->errors());
+            }
+
+            return redirect()->route('groups.show', $group->groupID)
+                ->with('error', 'Ошибки валидации: ' . implode(' | ', $errors));
+        } catch (\Exception $e) {
+            return redirect()->route('groups.show', $group->groupID)
+                ->with('error', 'Ошибка при импорте: ' . $e->getMessage());
+        }
     }
 }

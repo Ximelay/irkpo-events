@@ -46,6 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('groups', GroupController::class)->parameters([
         'groups' => 'group:groupID'
     ]);
+    Route::post('groups/{group}/import-students', [GroupController::class, 'importStudents'])
+        ->name('groups.importStudents');
+
     Route::resource('curators', CuratorController::class)->parameters([
         'curators' => 'curator:curatorID'
     ]);
