@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `irkpo_events`.`users`
     `user_firstName`  VARCHAR(50)  NOT NULL COMMENT 'Имя пользователя',
     `user_lastName`   VARCHAR(50)  NOT NULL COMMENT 'Фамилия пользователя',
     `user_middleName` VARCHAR(50)  NULL COMMENT 'Отчество пользователя (при наличии)',
-    `user_email`      VARCHAR(100) NOT NULL COMMENT 'Электронная почта пользователя',
+    `user_email`      VARCHAR(100) NULL COMMENT 'Электронная почта пользователя',
     `user_isActive`   TINYINT      NOT NULL DEFAULT 1 COMMENT 'Статус пользователя. По умолчанию 1 (true)',
     `createdAt`       DATETIME     NULL     DEFAULT CURRENT_TIMESTAMP() COMMENT 'Дата создания записи',
     `groups_groupID`  INT          NULL COMMENT 'Связь учебных групп с пользователями',
