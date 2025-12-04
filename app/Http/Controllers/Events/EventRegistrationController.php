@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Events;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\EventGroupRegistration;
 use App\Models\EventRegistration;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class EventRegistrationController extends Controller
      */
     public function index()
     {
-        $registrations = EventRegistration::with(['event', 'user'])->get();
+        $registrations = EventRegistration::with(['event', 'user.group'])->get();
         return view('event-registrations.index', compact('registrations'));
     }
 
@@ -39,6 +40,13 @@ class EventRegistrationController extends Controller
             'users_userID' => 'required|exists:users,userID|unique:eventRegistrations,users_userID,NULL,registrationID,events_eventID,' . $request->events_eventID,
             'statusEventRegistration' => 'required|string|max:50',
         ]);
+
+        // Проверяем, не участвует ли студент уже через свою группу
+        if (EventGroupRegistration::isUserParticipatingThroughGroup($request->events_eventID, $request->users_userID)) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['users_userID' => 'Этот студент уже участвует в мероприятии через свою группу.']);
+        }
 
         EventRegistration::create($request->all());
 
@@ -74,6 +82,13 @@ class EventRegistrationController extends Controller
             'users_userID' => 'required|exists:users,userID|unique:eventRegistrations,users_userID,' . $eventRegistration->registrationID . ',registrationID,events_eventID,' . $request->events_eventID,
             'statusEventRegistration' => 'required|string|max:50',
         ]);
+
+        // Проверяем, не участвует ли студент уже через свою группу
+        if (EventGroupRegistration::isUserParticipatingThroughGroup($request->events_eventID, $request->users_userID)) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['users_userID' => 'Этот студент уже участвует в мероприятии через свою группу.']);
+        }
 
         $eventRegistration->update($request->all());
 

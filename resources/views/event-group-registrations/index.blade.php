@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Регистрации на мероприятия
+            Регистрации групп на мероприятия
         </h2>
     </x-slot>
 
@@ -10,9 +10,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-lg font-semibold">Список регистраций</h3>
-                        <a href="{{ route('event-registrations.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Добавить регистрацию
+                        <h3 class="text-lg font-semibold">Список групповых регистраций</h3>
+                        <a href="{{ route('event-group-registrations.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Добавить группу к мероприятию
                         </a>
                     </div>
 
@@ -27,8 +27,9 @@
                             <tr>
                                 <th class="py-2 px-4 border-b">ID</th>
                                 <th class="py-2 px-4 border-b">Мероприятие</th>
-                                <th class="py-2 px-4 border-b">Пользователь</th>
                                 <th class="py-2 px-4 border-b">Группа</th>
+                                <th class="py-2 px-4 border-b">Специальность</th>
+                                <th class="py-2 px-4 border-b">Кол-во студентов</th>
                                 <th class="py-2 px-4 border-b">Статус</th>
                                 <th class="py-2 px-4 border-b">Дата регистрации</th>
                                 <th class="py-2 px-4 border-b">Действия</th>
@@ -37,19 +38,25 @@
                         <tbody>
                             @foreach ($registrations as $registration)
                                 <tr>
-                                    <td class="py-2 px-4 border-b">{{ $registration->registrationID }}</td>
+                                    <td class="py-2 px-4 border-b">{{ $registration->groupRegistrationID }}</td>
                                     <td class="py-2 px-4 border-b">{{ $registration->event->title }}</td>
-                                    <td class="py-2 px-4 border-b">{{ $registration->user->user_lastName }} {{ $registration->user->user_firstName }}</td>
-                                    <td class="py-2 px-4 border-b">{{ $registration->user->group->groupName ?? '-' }}</td>
-                                    <td class="py-2 px-4 border-b">{{ $registration->statusEventRegistration }}</td>
+                                    <td class="py-2 px-4 border-b">{{ $registration->group->groupName }}</td>
+                                    <td class="py-2 px-4 border-b">{{ $registration->group->speciality->specialityName ?? '-' }}</td>
+                                    <td class="py-2 px-4 border-b">{{ $registration->group->users->count() }}</td>
+                                    <td class="py-2 px-4 border-b">
+                                        <span class="px-2 py-1 text-xs rounded-full
+                                            {{ $registration->statusGroupRegistration === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
+                                            {{ $registration->statusGroupRegistration }}
+                                        </span>
+                                    </td>
                                     <td class="py-2 px-4 border-b">{{ $registration->registrationDate }}</td>
                                     <td class="py-2 px-4 border-b">
-                                        <a href="{{ route('event-registrations.show', $registration) }}" class="text-blue-600 hover:text-blue-800 font-medium">Просмотр</a>
-                                        <a href="{{ route('event-registrations.edit', $registration) }}" class="text-indigo-600 hover:text-indigo-800 font-medium ml-2">Редактировать</a>
-                                        <form action="{{ route('event-registrations.destroy', $registration) }}" method="POST" class="inline">
+                                        <a href="{{ route('event-group-registrations.show', $registration) }}" class="text-blue-600 hover:text-blue-800 font-medium">Просмотр</a>
+                                        <a href="{{ route('event-group-registrations.edit', $registration) }}" class="text-indigo-600 hover:text-indigo-800 font-medium ml-2">Редактировать</a>
+                                        <form action="{{ route('event-group-registrations.destroy', $registration) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-800 font-medium ml-2">Удалить</button>
+                                            <button type="submit" class="text-red-600 hover:text-red-800 font-medium ml-2" onclick="return confirm('Удалить регистрацию группы?')">Удалить</button>
                                         </form>
                                     </td>
                                 </tr>

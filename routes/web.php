@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Curators\CuratorController;
 use App\Http\Controllers\Events\EventController;
+use App\Http\Controllers\Events\EventGroupRegistrationController;
 use App\Http\Controllers\Events\EventRegistrationController;
 use App\Http\Controllers\Events\EventTypeController;
 use App\Http\Controllers\Faculties\FacultyController;
@@ -70,6 +71,10 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('event-registrations', EventRegistrationController::class)->parameters([
         'event-registrations' => 'eventRegistration:registrationID'
+    ]);
+
+    Route::resource('event-group-registrations', EventGroupRegistrationController::class)->parameters([
+        'event-group-registrations' => 'eventGroupRegistration:groupRegistrationID'
     ]);
 });
 

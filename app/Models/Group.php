@@ -32,4 +32,9 @@ class Group extends Model
     {
         return $this->hasMany(Curator::class, 'groups_groupID', 'groupID');
     }
+
+    public function eventRegistrations(): HasMany
+    {
+        return $this->hasMany(EventGroupRegistration::class, 'groups_groupID', 'groupID');
+    }
 }
