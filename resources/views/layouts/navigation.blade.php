@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('event-registrations.index')" :active="request()->routeIs('event-registrations.*')">
                         {{ __('Регистрация на мероприятия') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('event-group-registrations.index')" :active="request()->routeIs('event-group-registrations.*')">
+                        {{ __('Регистрация групп') }}
+                    </x-nav-link>
                 </div>
             </div>
 

@@ -63,4 +63,24 @@ class Event extends Model
     {
         return $this->hasMany(Inventory::class, 'events_eventID', 'eventID');
     }
+
+    public function groupRegistrations(): HasMany
+    {
+        return $this->hasMany(EventGroupRegistration::class, 'events_eventID', 'eventID');
+    }
+
+    /**
+     * Получить все группы, зарегистрированные на мероприятие
+     */
+    public function registeredGroups()
+    {
+        return $this->hasManyThrough(
+            Group::class,
+            EventGroupRegistration::class,
+            'events_eventID',
+            'groupID',
+            'eventID',
+            'groups_groupID'
+        );
+    }
 }
