@@ -265,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `irkpo_events`.`events`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `irkpo_events`.`eventGroupRegistrations`
 (
-    `groupRegistrationID`     BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `groupRegistrationID`     INT NOT NULL AUTO_INCREMENT,
     `registrationDate`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `statusGroupRegistration` VARCHAR(50)     NOT NULL DEFAULT 'active',
     `events_eventID`          INT             NOT NULL,

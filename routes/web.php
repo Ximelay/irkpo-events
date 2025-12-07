@@ -12,6 +12,7 @@ use App\Http\Controllers\Inventories\InventoryCategoryController;
 use App\Http\Controllers\Inventories\InventoryController;
 use App\Http\Controllers\Organizers\OrganizerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Reports\ReportController;
 use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -76,6 +77,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('event-group-registrations', EventGroupRegistrationController::class)->parameters([
         'event-group-registrations' => 'eventGroupRegistration:groupRegistrationID'
     ]);
+
+    // Маршруты для отчётов
+    Route::prefix('reports')->name('reports.')->group(function () {
+        Route::get('/', [ReportController::class, 'index'])->name('index');
+        Route::get('/groups', [ReportController::class, 'exportGroupParticipation'])->name('groups');
+        Route::get('/students', [ReportController::class, 'exportStudentParticipation'])->name('students');
+        Route::get('/events', [ReportController::class, 'exportEventsStatistics'])->name('events');
+        Route::get('/organizers', [ReportController::class, 'exportOrganizerStatistics'])->name('organizers');
+    });
 });
 
 require __DIR__.'/auth.php';
