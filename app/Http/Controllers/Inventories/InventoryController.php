@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Inventories;
 
 use App\Http\Controllers\Controller;
-use App\Models\Event;
 use App\Models\Inventory;
 use App\Models\InventoryCategory;
 use Illuminate\Http\Request;
@@ -15,7 +14,7 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        $inventories = Inventory::with(['inventoryCategories', 'events'])->get();
+        $inventories = Inventory::with('inventoryCategories')->get();
         return view('inventories.index', compact('inventories'));
     }
 
@@ -25,8 +24,7 @@ class InventoryController extends Controller
     public function create()
     {
         $inventoryCategories = InventoryCategory::all();
-        $events = Event::all();
-        return view('inventories.create', compact('inventoryCategories', 'events'));
+        return view('inventories.create', compact('inventoryCategories'));
     }
 
     /**
@@ -38,13 +36,12 @@ class InventoryController extends Controller
             'nameInventory' => 'required|max:50',
             'countInventory' => 'required|integer|min:0',
             'inventoryCategories_inventoryCategoryID' => 'required|exists:inventoryCategories,inventoryCategoryID',
-            'events_eventID' => 'required|exists:events,eventID',
         ]);
 
         Inventory::create($request->all());
 
         return redirect()->route('inventories.index')
-            ->with('success', 'Inventory created successfully.');
+            ->with('success', 'Инвентарь успешно создан.');
     }
 
     /**
@@ -52,6 +49,7 @@ class InventoryController extends Controller
      */
     public function show(Inventory $inventory)
     {
+        $inventory->load(['inventoryCategories', 'events']);
         return view('inventories.show', compact('inventory'));
     }
 
@@ -61,8 +59,7 @@ class InventoryController extends Controller
     public function edit(Inventory $inventory)
     {
         $inventoryCategories = InventoryCategory::all();
-        $events = Event::all();
-        return view('inventories.edit', compact('inventory', 'inventoryCategories', 'events'));
+        return view('inventories.edit', compact('inventory', 'inventoryCategories'));
     }
 
     /**
@@ -74,13 +71,12 @@ class InventoryController extends Controller
             'nameInventory' => 'required|max:50',
             'countInventory' => 'required|integer|min:0',
             'inventoryCategories_inventoryCategoryID' => 'required|exists:inventoryCategories,inventoryCategoryID',
-            'events_eventID' => 'required|exists:events,eventID',
         ]);
 
         $inventory->update($request->all());
 
         return redirect()->route('inventories.index')
-            ->with('success', 'Inventory updated successfully');
+            ->with('success', 'Инвентарь успешно обновлён');
     }
 
     /**
@@ -91,6 +87,6 @@ class InventoryController extends Controller
         $inventory->delete();
 
         return redirect()->route('inventories.index')
-            ->with('success', 'Inventory deleted successfully');
+            ->with('success', 'Инвентарь успешно удалён');
     }
 }

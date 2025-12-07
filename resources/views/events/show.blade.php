@@ -121,6 +121,7 @@
                                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
                                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Дата регистрации</th>
                                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Статус</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Действия</th>
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
@@ -142,6 +143,15 @@
                                                         {{ $registration->statusEventRegistration }}
                                                     </span>
                                                 </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                                    <form action="{{ route('event-registrations.destroy', $registration->registrationID) }}" method="POST" class="inline" onsubmit="return confirm('Вы уверены, что хотите удалить регистрацию этого участника?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="text-red-600 hover:text-red-800 font-medium">
+                                                            Удалить
+                                                        </button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -149,6 +159,118 @@
                             </div>
                         </div>
                     @endif
+
+                    <!-- Групповые регистрации -->
+                    @if($event->groupRegistrations->count() > 0)
+                        <div class="mt-6 pt-6 border-t">
+                            <h3 class="text-lg font-semibold mb-4">Зарегистрированные группы ({{ $event->groupRegistrations->count() }})</h3>
+
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Группа</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Специальность</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Дата регистрации</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Статус</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        @foreach($event->groupRegistrations as $groupRegistration)
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                    {{ $groupRegistration->group->groupName ?? '' }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                    {{ $groupRegistration->group->speciality->specialityName ?? '' }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                    {{ $groupRegistration->registrationDate ? \Carbon\Carbon::parse($groupRegistration->registrationDate)->format('d.m.Y H:i') : '' }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                        {{ $groupRegistration->statusGroupRegistration }}
+                                                    </span>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                                    <form action="{{ route('event-group-registrations.destroy', $groupRegistration->groupRegistrationID) }}" method="POST" class="inline" onsubmit="return confirm('Вы уверены, что хотите удалить регистрацию этой группы?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="text-red-600 hover:text-red-800 font-medium">
+                                                            Удалить
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- Инвентарь -->
+                    <div class="mt-6 pt-6 border-t">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-semibold">Необходимый инвентарь ({{ $event->assignedInventories->count() }})</h3>
+                            <a href="{{ route('event-inventory.create', ['event_id' => $event->eventID]) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                                Добавить инвентарь
+                            </a>
+                        </div>
+
+                        @if($event->assignedInventories->count() > 0)
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Название</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Категория</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Количество</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Доступно на складе</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Добавлено</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        @foreach($event->assignedInventories as $inventory)
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                    {{ $inventory->nameInventory }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                    {{ $inventory->inventoryCategories->nameInventoryCategory ?? 'Без категории' }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                    <span class="font-semibold text-blue-600">{{ $inventory->pivot->quantity }}</span>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                    {{ $inventory->countInventory }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                    {{ $inventory->pivot->addedAt ? \Carbon\Carbon::parse($inventory->pivot->addedAt)->format('d.m.Y H:i') : '-' }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+                                                    <a href="{{ route('event-inventory.edit', $inventory->pivot->eventInventoryID) }}" class="text-indigo-600 hover:text-indigo-800 font-medium">
+                                                        Изменить
+                                                    </a>
+                                                    <form action="{{ route('event-inventory.destroy', $inventory->pivot->eventInventoryID) }}" method="POST" class="inline" onsubmit="return confirm('Вы уверены, что хотите удалить этот инвентарь из мероприятия?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="text-red-600 hover:text-red-800 font-medium">
+                                                            Удалить
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @else
+                            <p class="text-gray-600">Инвентарь ещё не добавлен к этому мероприятию.</p>
+                        @endif
+                    </div>
 
                     <!-- Удаление -->
                     <div class="mt-6 pt-6 border-t">

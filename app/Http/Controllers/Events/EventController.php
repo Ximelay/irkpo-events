@@ -55,7 +55,15 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        $event->load(['eventType', 'eventStatus', 'organizer', 'faculty', 'registrations.user']);
+        $event->load([
+            'eventType',
+            'eventStatus',
+            'organizer',
+            'faculty',
+            'registrations.user',
+            'groupRegistrations.group.speciality',
+            'assignedInventories.inventoryCategories'
+        ]);
 
         return view('events.show', compact('event'));
     }

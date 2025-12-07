@@ -27,9 +27,8 @@
                             <tr>
                                 <th class="py-2 px-4 border-b">ID</th>
                                 <th class="py-2 px-4 border-b">Название</th>
-                                <th class="py-2 px-4 border-b">Количество</th>
+                                <th class="py-2 px-4 border-b">Количество на складе</th>
                                 <th class="py-2 px-4 border-b">Категория</th>
-                                <th class="py-2 px-4 border-b">Мероприятие</th>
                                 <th class="py-2 px-4 border-b">Действия</th>
                             </tr>
                         </thead>
@@ -40,7 +39,6 @@
                                     <td class="py-2 px-4 border-b">{{ $inventory->nameInventory }}</td>
                                     <td class="py-2 px-4 border-b">{{ $inventory->countInventory }}</td>
                                     <td class="py-2 px-4 border-b">{{ $inventory->inventoryCategories->nameInventoryCategory }}</td>
-                                    <td class="py-2 px-4 border-b">{{ $inventory->events->title }}</td>
                                     <td class="py-2 px-4 border-b">
                                         <a href="{{ route('inventories.show', $inventory) }}" class="text-blue-600 hover:text-blue-800 font-medium">Просмотр</a>
                                         <a href="{{ route('inventories.edit', $inventory) }}" class="text-indigo-600 hover:text-indigo-800 font-medium ml-2">Редактировать</a>

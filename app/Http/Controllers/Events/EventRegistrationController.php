@@ -101,7 +101,15 @@ class EventRegistrationController extends Controller
      */
     public function destroy(EventRegistration $eventRegistration)
     {
+        $eventID = $eventRegistration->events_eventID;
         $eventRegistration->delete();
+
+        // Если есть referer и это страница мероприятия, вернуться туда
+        $referer = request()->headers->get('referer');
+        if ($referer && str_contains($referer, '/events/')) {
+            return redirect()->route('events.show', $eventID)
+                ->with('success', 'Регистрация участника успешно удалена.');
+        }
 
         return redirect()->route('event-registrations.index')
             ->with('success', 'Registration deleted successfully');

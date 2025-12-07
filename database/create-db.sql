@@ -372,17 +372,10 @@ CREATE TABLE IF NOT EXISTS `irkpo_events`.`inventories`
 (
     `inventoryID`                             INT         NOT NULL AUTO_INCREMENT COMMENT 'Уникальный идентификатор единицы инвенторя',
     `nameInventory`                           VARCHAR(50) NOT NULL COMMENT 'Наименование инвентаря',
-    `countInventory`                          INT         NOT NULL COMMENT 'Количество инвентаря',
+    `countInventory`                          INT         NOT NULL COMMENT 'Общее количество инвентаря на складе',
     `inventoryCategories_inventoryCategoryID` INT         NOT NULL COMMENT 'Связь категорий инвентаря с его инвентарём',
-    `events_eventID`                          INT         NOT NULL COMMENT 'Связь мероприятий с необходимым ему инвентарём',
     PRIMARY KEY (`inventoryID`),
     INDEX `fk_Inventories_InventoryCategories1_idx` (`inventoryCategories_inventoryCategoryID` ASC) VISIBLE,
-    INDEX `fk_Inventories_events1_idx` (`events_eventID` ASC) VISIBLE,
-    CONSTRAINT `fk_Inventories_events1`
-        FOREIGN KEY (`events_eventID`)
-            REFERENCES `irkpo_events`.`events` (`eventID`)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE,
     CONSTRAINT `fk_Inventories_InventoryCategories1`
         FOREIGN KEY (`inventoryCategories_inventoryCategoryID`)
             REFERENCES `irkpo_events`.`inventoryCategories` (`inventoryCategoryID`)
@@ -390,9 +383,42 @@ CREATE TABLE IF NOT EXISTS `irkpo_events`.`inventories`
             ON UPDATE CASCADE
 )
     ENGINE = InnoDB
+    AUTO_INCREMENT = 1
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci
     COMMENT = 'Таблица инвентаря';
+
+
+-- -----------------------------------------------------
+-- Table `irkpo_events`.`eventInventory`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `irkpo_events`.`eventInventory`
+(
+    `eventInventoryID`        INT      NOT NULL AUTO_INCREMENT COMMENT 'Уникальный идентификатор связи мероприятия и инвентаря',
+    `events_eventID`          INT      NOT NULL COMMENT 'ID мероприятия',
+    `inventories_inventoryID` INT      NOT NULL COMMENT 'ID инвентаря',
+    `quantity`                INT      NOT NULL DEFAULT '1' COMMENT 'Количество единиц инвентаря для мероприятия',
+    `addedAt`                 DATETIME NULL     DEFAULT CURRENT_TIMESTAMP COMMENT 'Дата добавления инвентаря к мероприятию',
+    PRIMARY KEY (`eventInventoryID`),
+    UNIQUE INDEX `unique_event_inventory` (`events_eventID` ASC, `inventories_inventoryID` ASC) COMMENT 'Один инвентарь можно добавить к мероприятию только один раз' VISIBLE,
+    INDEX `fk_eventInventory_events_idx` (`events_eventID` ASC) VISIBLE,
+    INDEX `fk_eventInventory_inventories_idx` (`inventories_inventoryID` ASC) VISIBLE,
+    CONSTRAINT `fk_eventInventory_events`
+        FOREIGN KEY (`events_eventID`)
+            REFERENCES `irkpo_events`.`events` (`eventID`)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
+    CONSTRAINT `fk_eventInventory_inventories`
+        FOREIGN KEY (`inventories_inventoryID`)
+            REFERENCES `irkpo_events`.`inventories` (`inventoryID`)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
+)
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 1
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci
+    COMMENT = 'Таблица связи мероприятий и инвентаря с указанием количества';
 
 
 -- -----------------------------------------------------

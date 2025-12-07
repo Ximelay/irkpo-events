@@ -61,7 +61,22 @@ class Event extends Model
 
     public function inventories(): HasMany
     {
-        return $this->hasMany(Inventory::class, 'events_eventID', 'eventID');
+        return $this->hasMany(EventInventory::class, 'events_eventID', 'eventID');
+    }
+
+    /**
+     * Получить инвентарь, назначенный на мероприятие (через pivot таблицу)
+     */
+    public function assignedInventories()
+    {
+        return $this->belongsToMany(
+            Inventory::class,
+            'eventInventory',
+            'events_eventID',
+            'inventories_inventoryID',
+            'eventID',
+            'inventoryID'
+        )->withPivot('quantity', 'addedAt', 'eventInventoryID');
     }
 
     public function groupRegistrations(): HasMany

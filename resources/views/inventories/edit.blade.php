@@ -38,14 +38,6 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="mb-4">
-                            <label for="events_eventID" class="block text-gray-700 text-sm font-bold mb-2">Мероприятие:</label>
-                            <select name="events_eventID" id="events_eventID" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                                @foreach ($events as $event)
-                                    <option value="{{ $event->eventID }}" @if($inventory->events_eventID == $event->eventID) selected @endif>{{ $event->title }}</option>
-                                @endforeach
-                            </select>
-                        </div>
                         <div class="flex items-center justify-between">
                             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                                 Обновить
