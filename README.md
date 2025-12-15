@@ -1,59 +1,187 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ИРКПО - Система управления мероприятиями
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel">
+  <img src="https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP">
+  <img src="https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
+  <img src="https://img.shields.io/badge/TailwindCSS-3.x-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="TailwindCSS">
+  <img src="https://img.shields.io/badge/Alpine.js-3.x-8BC0D0?style=for-the-badge&logo=alpine.js&logoColor=white" alt="Alpine.js">
 </p>
 
-## About Laravel
+<p align="center">
+  <a href="https://github.com/Ximelay/irkpo-events/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/Ximelay/irkpo-events?style=flat-square" alt="License">
+  </a>
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## О проекте
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**ИРКПО Events** — это комплексная веб-система для управления мероприятиями Иркутского регионального колледжа педагогического образования (ИРКПО). Система предоставляет удобные инструменты для планирования, организации и учёта участия студентов в различных мероприятиях.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<img width="1920" height="1090" alt="изображение" src="https://github.com/user-attachments/assets/63f52756-789f-4de6-9af3-17ce34fb49d0" />
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### Основные возможности
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-  **Управление мероприятиями** — создание, редактирование и отслеживание статусов мероприятий
+-  **Регистрация участников** — индивидуальная и групповая регистрация студентов
+-  **Управление структурой** — факультеты, специальности, группы и кураторы
+-  **Учёт инвентаря** — отслеживание оборудования и материалов для мероприятий
+-  **Роли пользователей** — администраторы, организаторы, кураторы и студенты
+-  **Отчётность и статистика** — экспорт данных в Excel
+-  **SEO оптимизация** — карта сайта и мета-теги
 
-## Laravel Sponsors
+## Технологии
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+| Категория | Технологии |
+|-----------|------------|
+| **Backend** | Laravel 12, PHP 8.4 |
+| **Frontend** | Blade, TailwindCSS 3, Alpine.js |
+| **База данных** | MySQL 8.0 |
+| **Сборка** | Vite 7, PostCSS |
+| **Инфраструктура** | Docker, Docker Compose |
+| **Экспорт данных** | Maatwebsite Excel |
 
-### Premium Partners
+## Требования
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- PHP >= 8.4
+- Composer
+- Node.js >= 18.x
+- npm >= 9.x
+- MySQL >= 8.0 или MariaDB >= 10.6
+- Docker и Docker Compose (опционально)
 
-## Contributing
+## Установка
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Локальная установка
 
-## Code of Conduct
+1. **Клонируйте репозиторий:**
+```bash
+git clone https://github.com/Ximelay/irkpo-events.git
+cd irkpo-events
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. **Установите PHP зависимости:**
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+3. **Настройте окружение:**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+4. **Настройте базу данных в `.env`:**
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=irkpo_events
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-## License
+5. **Выполните миграции:**
+```bash
+php artisan migrate
+```
 
-The Laravel framework is open-sourced software licensed under the [BSD 3.0 license](https://github.com/Ximelay/irkpo-events/blob/main/LICENSE).
+6. **Установите npm зависимости и соберите фронтенд:**
+```bash
+npm install
+npm run build
+```
+
+7. **Запустите сервер разработки:**
+```bash
+php artisan serve
+```
+
+Приложение будет доступно по адресу: `http://localhost:8000`
+
+### Docker установка
+
+1. **Клонируйте репозиторий:**
+```bash
+git clone https://github.com/Ximelay/irkpo-events.git
+cd irkpo-events
+```
+
+2. **Настройте окружение:**
+```bash
+cp .env.example .env
+```
+
+3. **Запустите контейнеры:**
+```bash
+docker-compose up -d
+```
+
+4. **Выполните миграции в контейнере:**
+```bash
+docker-compose exec app php artisan migrate
+```
+
+Приложение будет доступно по адресу: `http://localhost:8000`
+
+## 📁 Структура проекта
+
+```
+irkpo-events/
+├── app/
+│   ├── Exports/           # Экспорт данных в Excel
+│   ├── Http/
+│   │   ├── Controllers/   # Контроллеры приложения
+│   │   └── Requests/      # Form Requests валидации
+│   ├── Imports/           # Импорт данных
+│   ├── Models/            # Eloquent модели
+│   ├── Providers/         # Сервис-провайдеры
+│   └── View/              # View компоненты
+├── config/                # Конфигурационные файлы
+├── database/
+│   ├── migrations/        # Миграции БД
+│   └── seeders/           # Сидеры для тестовых данных
+├── public/                # Публичные файлы
+├── resources/
+│   ├── css/               # CSS стили
+│   ├── js/                # JavaScript файлы
+│   └── views/             # Blade шаблоны
+├── routes/                # Маршруты приложения
+├── storage/               # Файловое хранилище
+└── tests/                 # Тесты
+```
+
+## Модели данных
+
+| Модель | Описание |
+|--------|----------|
+| `Event` | Мероприятие |
+| `EventType` | Тип мероприятия |
+| `EventStatus` | Статус мероприятия |
+| `EventRegistration` | Регистрация на мероприятие |
+| `EventGroupRegistration` | Групповая регистрация |
+| `User` | Пользователь (студент) |
+| `Admin` | Администратор |
+| `Organizer` | Организатор |
+| `Curator` | Куратор |
+| `Faculty` | Факультет |
+| `Specialty` | Специальность |
+| `Group` | Учебная группа |
+| `Inventory` | Инвентарь |
+| `InventoryCategory` | Категория инвентаря |
+| `EventInventory` | Инвентарь мероприятия |
+
+## 📄 Лицензия
+
+Этот проект распространяется под лицензией [BSD 3-Clause License](LICENSE).
+
+## Автор
+
+**Ximelay** — [GitHub](https://github.com/Ximelay)
+
+---
+
+<p align="center">
+  Разработано с ❤️ для Иркутского регионального колледжа педагогического образования
+</p>
